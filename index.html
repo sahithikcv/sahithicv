@@ -119,12 +119,12 @@
             <div class="flex flex-col md:flex-row gap-8 mb-12 items-start">
                 <!-- Thumbnail -->
                 <div class="md:w-1/4 w-full flex-shrink-0">
-                    <div class="border border-gray-100 rounded overflow-hidden shadow-sm hover:shadow-md transition">
+                    <div class="image-container shadow-sm hover:shadow-md transition">
                         <img 
-                            src="indicdlp.png" 
+                            src="indicdlp_dataset.png" 
                             alt="IndicDLP Architecture Visualization" 
-                            class="w-full h-auto"
-                            onerror="this.onerror=null; this.parentElement.innerHTML='<div class=\'bg-gray-50 flex flex-col items-center justify-center p-8 text-gray-300\'><i class=\'fas fa-file-invoice text-4xl mb-2\'></i><span class=\'text-[10px] uppercase font-bold tracking-widest\'>Project Image</span></div>';"
+                            class="w-full h-auto block"
+                            onerror="this.onerror=null; this.parentElement.innerHTML='<div class=\'p-8 text-center text-gray-300\'><i class=\'fas fa-image text-3xl mb-1\'></i><p class=\'text-[10px] font-bold uppercase\'>indicdlp.png</p></div>';"
                         >
                     </div>
                 </div>
@@ -145,11 +145,11 @@
                         International Conference on Document Analysis and Recognition (ICDAR), 2025
                     </div>
 
-                    <div class="pub-links mt-4">
-                        <a href="https://arxiv.org/abs/2512.20236" target="_blank"><i class="fas fa-file-pdf mr-1"></i> [Paper]</a>
-                        <button onclick="toggleAbstract()"><i class="fas fa-file-alt mr-1"></i> [Abstract]</button>
-                        <a href="https://indicdlp.github.io/" target="_blank"><i class="fas fa-globe mr-1"></i> [Project Page]</a>
-                        <button onclick="toggleBibtex()"><i class="fas fa-quote-right mr-1"></i> [BibTeX]</button>
+                    <div class="pub-links">
+                        <a href="https://arxiv.org/abs/2512.20236" target="_blank">[Paper]</a>
+                        <button onclick="toggleAbstract()">[Abstract]</button>
+                        <a href="https://indicdlp.github.io/" target="_blank">[Project Page]</a>
+                        <button onclick="toggleBibtex()">[BibTeX]</button>
                     </div>
 
                     <!-- Hidden Abstract Section -->
@@ -159,7 +159,7 @@
 
                     <!-- Hidden BibTeX Section -->
                     <div id="bibtex-container" class="toggle-box font-mono text-[11px] hidden relative">
-                        <button class="absolute top-2 right-2 text-blue-600 hover:text-blue-800" onclick="navigator.clipboard.writeText(document.getElementById('bibtex').innerText)">Copy</button>
+                        <button class="absolute top-2 right-2 text-blue-600 hover:text-blue-800" onclick="copyBib()">Copy</button>
                         <pre id="bibtex" class="whitespace-pre-wrap">@inproceedings{nath2025indicdlp,
   title={IndicDLP: A Foundational Dataset for Multi-lingual and Multi-domain Document Layout Parsing},
   author={Nath, Om and Kukkala, Sahithi and Sarvadevabhatla, Ravi Kiran},
@@ -195,15 +195,20 @@
         function toggleBibtex() {
             const bibContainer = document.getElementById('bibtex-container');
             const absContainer = document.getElementById('abstract-container');
-            absContainer.classList.add('hidden'); // Close other box
+            absContainer.classList.add('hidden'); 
             bibContainer.classList.toggle('hidden');
         }
 
         function toggleAbstract() {
             const absContainer = document.getElementById('abstract-container');
             const bibContainer = document.getElementById('bibtex-container');
-            bibContainer.classList.add('hidden'); // Close other box
+            bibContainer.classList.add('hidden'); 
             absContainer.classList.toggle('hidden');
+        }
+
+        function copyBib() {
+            const text = document.getElementById('bibtex').innerText;
+            navigator.clipboard.writeText(text);
         }
 
         window.addEventListener('load', () => {
