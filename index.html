@@ -145,19 +145,20 @@
                         International Conference on Document Analysis and Recognition (ICDAR), 2025
                     </div>
 
-                    <p class="text-sm text-gray-600 mt-4 leading-relaxed italic">
-                        IndicDLP is the largest manual layout dataset for document understanding in Indian languages, featuring 121K+ images and 42 region labels across 11 languages plus English.
-                    </p>
-
                     <div class="pub-links mt-4">
-                        <a href="#"><i class="fas fa-file-pdf mr-1"></i> [Paper]</a>
-                        <a href="#"><i class="fab fa-github mr-1"></i> [Code/Models]</a>
-                        <a href="#"><i class="fas fa-database mr-1"></i> [Dataset]</a>
-                        <button onclick="toggleBibtex()" class="text-[#003380] font-semibold text-[13px] hover:underline cursor-pointer"><i class="fas fa-quote-right mr-1"></i> [BibTeX]</button>
+                        <a href="https://arxiv.org/abs/2512.20236" target="_blank"><i class="fas fa-file-pdf mr-1"></i> [Paper]</a>
+                        <button onclick="toggleAbstract()"><i class="fas fa-file-alt mr-1"></i> [Abstract]</button>
+                        <a href="https://indicdlp.github.io/" target="_blank"><i class="fas fa-globe mr-1"></i> [Project Page]</a>
+                        <button onclick="toggleBibtex()"><i class="fas fa-quote-right mr-1"></i> [BibTeX]</button>
                     </div>
 
-                    <!-- Hidden BibTeX -->
-                    <div id="bibtex-container" class="mt-4 bg-gray-50 p-4 border border-gray-100 rounded text-[11px] font-mono text-gray-500 hidden relative">
+                    <!-- Hidden Abstract Section -->
+                    <div id="abstract-container" class="toggle-box hidden">
+                        <strong>Abstract:</strong> IndicDLP is the largest manual layout dataset for document understanding in Indian languages, featuring 121K+ images and 42 region labels across 11 languages plus English. It provides a robust foundation for multi-lingual and multi-domain document layout parsing research in the Indic context.
+                    </div>
+
+                    <!-- Hidden BibTeX Section -->
+                    <div id="bibtex-container" class="toggle-box font-mono text-[11px] hidden relative">
                         <button class="absolute top-2 right-2 text-blue-600 hover:text-blue-800" onclick="navigator.clipboard.writeText(document.getElementById('bibtex').innerText)">Copy</button>
                         <pre id="bibtex" class="whitespace-pre-wrap">@inproceedings{nath2025indicdlp,
   title={IndicDLP: A Foundational Dataset for Multi-lingual and Multi-domain Document Layout Parsing},
@@ -192,8 +193,17 @@
         }
 
         function toggleBibtex() {
-            const container = document.getElementById('bibtex-container');
-            container.classList.toggle('hidden');
+            const bibContainer = document.getElementById('bibtex-container');
+            const absContainer = document.getElementById('abstract-container');
+            absContainer.classList.add('hidden'); // Close other box
+            bibContainer.classList.toggle('hidden');
+        }
+
+        function toggleAbstract() {
+            const absContainer = document.getElementById('abstract-container');
+            const bibContainer = document.getElementById('bibtex-container');
+            bibContainer.classList.add('hidden'); // Close other box
+            absContainer.classList.toggle('hidden');
         }
 
         window.addEventListener('load', () => {
